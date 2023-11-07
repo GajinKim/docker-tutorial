@@ -1,0 +1,33 @@
+version: '3.1'
+
+# each of these services can be thought of as a 'container'
+services:
+  postgres_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+    ports: 
+      - 5432:5432 # {port on my local machine}:{port inside docker container}
+                  # this can be whatever : this one MUST be specific
+
+  postgres_db_2:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+    ports: 
+      - 5433:5432 # if we had two postgres databases, we would have to change the port for the local machine
+
+  oracle_db:
+    image: container-registry.oracle.com/database/express:latest
+    restart: always
+    environment:
+      ORACLE_PWD: password
+    ports: 
+      - 1521:1521
+    # Username: system
+    # Database: xe [SID]
+
+
+# docker compose up (to spin up docker containers, containers = running instances)
